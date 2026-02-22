@@ -132,6 +132,7 @@
 ### Trend
 
 ![](https://img.shields.io/badge/clyp-blue?logo=clyp&logoColor=white)  
+![](https://img.shields.io/badge/listenhub-blue?logo=listenhub&logoColor=white)  
 ![](https://img.shields.io/badge/audiomack-blue?logo=audiomack&logoColor=white)  
 ![](https://img.shields.io/badge/socialblade-blue?logo=socialblade&logoColor=white)  
 ![](https://img.shields.io/badge/audiomack-blue?logo=audiomack&logoColor=white)  
@@ -166,6 +167,7 @@
 
 ### Other
 
+![](https://img.shields.io/badge/labex-blue?logo=labex&logoColor=white)  
 ![](https://img.shields.io/badge/monster-blue?logo=monster&logoColor=white)  
 ![](https://img.shields.io/badge/diaspora-blue?logo=diaspora&logoColor=white)  
 ![](https://img.shields.io/badge/wxt-blue?logo=wxt&logoColor=white)  
@@ -176,7 +178,6 @@
 ![](https://img.shields.io/badge/i18next-blue?logo=i18next&logoColor=white)  
 ![](https://img.shields.io/badge/slashdot-blue?logo=slashdot&logoColor=white)  
 ![](https://img.shields.io/badge/jabber-blue?logo=jabber&logoColor=white)  
-![](https://img.shields.io/badge/labex-blue?logo=labex&logoColor=white)  
 ![](https://img.shields.io/badge/jekyll-blue?logo=jekyll&logoColor=white)  
 ![](https://img.shields.io/badge/concourse-blue?logo=concourse&logoColor=white)  
 ![](https://img.shields.io/badge/mapillary-blue?logo=mapillary&logoColor=white)  
