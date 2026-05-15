@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+
+    <!-- Red ring gradient: bright top-left to deep bottom-right -->
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#ff4466"/>
+      <stop offset="50%"  stop-color="#e0203a"/>
+      <stop offset="100%" stop-color="#991122"/>
+    </linearGradient>
+
+    <!-- Radial glow behind the ring -->
+    <radialGradient id="ringHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="82%" stop-color="#ff3355" stop-opacity="0"/>
+      <stop offset="92%" stop-color="#ff3355" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ff3355" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Right-half face: slightly cooler gray -->
+    <linearGradient id="rightFaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#c9c9d3"/>
+      <stop offset="100%" stop-color="#adadba"/>
+    </linearGradient>
+
+    <!-- Eye glow: radial red bloom -->
+    <radialGradient id="eyeBloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ff3355" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#cc1133" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Blur filter for eye glow -->
+    <filter id="fEyeGlow" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+
+    <!-- Drop shadow under the alien head -->
+    <filter id="fHeadShadow" x="-15%" y="-5%" width="130%" height="135%">
+      <feDropShadow dx="0" dy="14" stdDeviation="20"
+                    flood-color="#000000" flood-opacity="0.65"/>
+    </filter>
+
+    <!--
+      FACE PATH (used as clip and as shape):
+      Center 256,256. Head top ~y=86, bottom tip ~y=424.
+      Widest point ~x=136 and x=376 at y≈230.
+      All points confirmed inside dark-bg circle r=216.
+    -->
+    <clipPath id="cFace">
+      <path d="M256,86
+               C178,86 134,152 132,228
+               C130,294 155,346 198,386
+               C218,405 238,418 256,424
+               C274,418 294,405 314,386
+               C357,346 382,294 380,228
+               C378,152 334,86 256,86 Z"/>
+    </clipPath>
+
+  </defs>
+
+  <!-- ===================== RED RING ===================== -->
+  <!--
+    Ring center r=234, stroke-width=36.
+    Outer edge: 234+18 = 252 → fills to pixel 256+252=508 → 4px margin. ✓
+    Inner edge: 234-18 = 216 → dark bg starts here.
+  -->
+
+  <!-- Soft halo behind ring (purely radial fill, no stroke) -->
+  <circle cx="256" cy="256" r="252" fill="url(#ringHalo)"/>
+
+  <!-- Main ring -->
+  <circle cx="256" cy="256" r="234"
+          fill="none"
+          stroke="url(#ringGrad)"
+          stroke-width="36"/>
+
+  <!-- Bright inner-edge accent line -->
+  <circle cx="256" cy="256" r="216"
+          fill="none"
+          stroke="#ff6688"
+          stroke-width="1.5"
+          stroke-opacity="0.45"/>
+
+  <!-- ===================== DARK INTERIOR ===================== -->
+  <circle cx="256" cy="256" r="215" fill="#0d0d18"/>
+
+  <!-- Subtle grid (decorative, very low opacity) -->
+  <g stroke="#ffffff" stroke-width="0.8" opacity="0.045">
+    <line x1="156" y1="46"  x2="156" y2="466"/>
+    <line x1="206" y1="46"  x2="206" y2="466"/>
+    <line x1="256" y1="46"  x2="256" y2="466"/>
+    <line x1="306" y1="46"  x2="306" y2="466"/>
+    <line x1="356" y1="46"  x2="356" y2="466"/>
+    <line x1="46"  y1="156" x2="466" y2="156"/>
+    <line x1="46"  y1="206" x2="466" y2="206"/>
+    <line x1="46"  y1="256" x2="466" y2="256"/>
+    <line x1="46"  y1="306" x2="466" y2="306"/>
+    <line x1="46"  y1="356" x2="466" y2="356"/>
+  </g>
+
+  <!-- ===================== ALIEN HEAD ===================== -->
+
+  <!-- Drop shadow (offset copy, blurred) -->
+  <path d="M256,86
+           C178,86 134,152 132,228
+           C130,294 155,346 198,386
+           C218,405 238,418 256,424
+           C274,418 294,405 314,386
+           C357,346 382,294 380,228
+           C378,152 334,86 256,86 Z"
+        fill="#060610"
+        filter="url(#fHeadShadow)"
+        transform="translate(0,10)"/>
+
+  <!-- Left half — bright white -->
+  <path d="M256,86
+           C178,86 134,152 132,228
+           C130,294 155,346 198,386
+           C218,405 238,418 256,424
+           L256,86 Z"
+        fill="#f2f2f8"/>
+
+  <!-- Right half — cool light gray -->
+  <path d="M256,86
+           L256,424
+           C274,418 294,405 314,386
+           C357,346 382,294 380,228
+           C378,152 334,86 256,86 Z"
+        fill="url(#rightFaceGrad)"/>
+
+  <!-- Center split line -->
+  <line x1="256" y1="88" x2="256" y2="422"
+        stroke="#d8d8e4" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- ===================== EYES ===================== -->
+  <!--
+    Left eye center:  (198, 236)
+    Right eye center: (316, 236)
+    Ellipse rx=36 ry=25 — leaf/almond shape clipped to face.
+  -->
+
+  <!-- Eye bloom glow layers (drawn before eyes) -->
+  <ellipse cx="198" cy="236" rx="52" ry="38"
+           fill="url(#eyeBloom)" filter="url(#fEyeGlow)"/>
+  <ellipse cx="316" cy="236" rx="52" ry="38"
+           fill="url(#eyeBloom)" filter="url(#fEyeGlow)"/>
+
+  <!-- Left eye -->
+  <ellipse cx="198" cy="236" rx="36" ry="25"
+           fill="#14141e" clip-path="url(#cFace)"/>
+  <ellipse cx="198" cy="236" rx="36" ry="25"
+           fill="none" stroke="#ff3355" stroke-width="1.5" opacity="0.6"
+           clip-path="url(#cFace)"/>
+  <ellipse cx="192" cy="230" rx="10" ry="7"
+           fill="#ff3355" opacity="0.5" clip-path="url(#cFace)"/>
+  <ellipse cx="190" cy="228" rx="4.5" ry="3.5"
+           fill="#ff99aa" opacity="0.8" clip-path="url(#cFace)"/>
+
+  <!-- Right eye -->
+  <ellipse cx="316" cy="236" rx="36" ry="25"
+           fill="#14141e" clip-path="url(#cFace)"/>
+  <ellipse cx="316" cy="236" rx="36" ry="25"
+           fill="none" stroke="#ff3355" stroke-width="1.5" opacity="0.6"
+           clip-path="url(#cFace)"/>
+  <ellipse cx="310" cy="230" rx="10" ry="7"
+           fill="#ff3355" opacity="0.5" clip-path="url(#cFace)"/>
+  <ellipse cx="308" cy="228" rx="4.5" ry="3.5"
+           fill="#ff99aa" opacity="0.8" clip-path="url(#cFace)"/>
+
+  <!-- ===================== CORNER BRACKETS ===================== -->
+  <!--
+    Kept inside dark circle (r=215).
+    Corners at ~(118,118) and (394,394):
+    dist from center = sqrt(138²+138²) ≈ 195 ✓
+  -->
+  <g stroke="#ff3355" stroke-width="2.5" fill="none" stroke-opacity="0.55">
+    <polyline points="136,104 114,104 114,126"/>
+    <polyline points="376,104 398,104 398,126"/>
+    <polyline points="136,408 114,408 114,386"/>
+    <polyline points="376,408 398,408 398,386"/>
+  </g>
+
+  <!-- ===================== CARLRED LABEL ===================== -->
+  <!-- y=454: distance from center = 198 < 215 ✓ -->
+  <text x="256" y="454"
+        text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="18"
+        font-weight="700"
+        letter-spacing="6"
+        fill="#ff3355"
+        opacity="0.7">CARLRED</text>
+  <line x1="200" y1="461" x2="312" y2="461"
+        stroke="#ff3355" stroke-width="1" opacity="0.3"/>
+
+</svg>
